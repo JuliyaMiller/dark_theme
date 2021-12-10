@@ -1,58 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { Component } from 'react';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, themeSelector } from './redux/themeSlice';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+  const theme = useSelector(themeSelector);
+  const dispatch = useDispatch();
+  
+  console.log(theme)
+    return (
+    <div className="App_div"
+      style={{
+        color: theme.text_color,
+        background: theme.bg_color
+      }}
+    >
+          <p>
+            — А что это за звуки, вон там? – спросила Алиса, кивнув на весьма укромные заросли какой-то симпатичной растительности на краю сада.<br/>
+            — А это чудеса, – равнодушно пояснил Чеширский Кот.<br/>
+            — И.. И что же они там делают? – поинтересовалась девочка, неминуемо краснея.<br/>
+            —    Как и положено, – Кот зевнул. – Случаются…  
+          </p>
+          <h3>Алиса в Стране Чудес – Льюис Кэррол</h3>
+          
+          <button className="Button"
+            style={{
+              color: theme.text_color
+            }}
+            onClick={() => dispatch(change())}
+            >Change color</button>
+    </div> 
   );
-}
+ }
 
 export default App;
